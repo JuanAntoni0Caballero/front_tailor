@@ -14,15 +14,16 @@ const login = async (userData: any) => {
     if (!response.ok) {
       const errorData = await response.json();
       if (errorData.errorMessages) {
-        return errorData.errorMessages;
+        throw new Error(errorData.errorMessages.join(", "));
       } else {
-        throw new Error(errorData.errorMessages);
+        throw new Error("Unknown error occurred");
       }
     }
-    const token = await response.json();
-    return token;
-  } catch (error) {
-    console.error(error);
+
+    const token: string = await response.json();
+    return { token };
+  } catch (error: any) {
+    return { error: error.message };
   }
 };
 
@@ -42,19 +43,15 @@ const signUp = async (userData: any) => {
     if (!response.ok) {
       const errorData = await response.json();
       if (errorData.errorMessages) {
-        return errorData.errorMessages;
+        throw new Error(errorData.errorMessages.join(", "));
       } else {
-        throw new Error(
-          "Error desconocido durante el registro",
-          errorData.errorMessages
-        );
+        throw new Error("Unknown error occurred");
       }
     }
-    const data = await response.json();
-    console.log("la data", data);
-    return data;
-  } catch (error) {
-    console.error(error);
+    const data: object = await response.json();
+    return { data };
+  } catch (error: any) {
+    return { error: error.message };
   }
 };
 

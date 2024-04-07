@@ -38,10 +38,10 @@ const SignUp: React.FC = () => {
     } else {
       try {
         const response = await AuthService.signUp(formData);
-        if (response.ok) {
+        if (response.data) {
           router.push("/login");
-        } else {
-          setError([response]);
+        } else if (response.error) {
+          setError([response.error]);
         }
       } catch (err) {
         setError(["Error al crear la cuenta:"]);

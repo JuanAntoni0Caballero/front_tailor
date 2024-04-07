@@ -3,7 +3,7 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface UserData {
   id: number;
-  fullname: string;
+  fullName: string;
   email: string;
 }
 
@@ -30,7 +30,6 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string>("");
   const [userData, setUserData] = useState<UserData | null>(null);
-
   useEffect(() => {
     const storedToken = localStorage.getItem("authoToken");
     if (storedToken) {

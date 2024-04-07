@@ -42,11 +42,11 @@ const Login: React.FC = () => {
         return;
       }
       const response = await AuthService.login(formData);
-      if (response.ok) {
-        login(response);
+      if (response.token) {
+        login(response.token);
         router.push("/");
-      } else {
-        setError([response]);
+      } else if (response.error) {
+        setError([response.error]);
       }
     } catch (err) {
       setError(["Error al iniciar sesión:"]);

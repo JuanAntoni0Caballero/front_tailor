@@ -6,7 +6,7 @@ import ButtonComponent from "./buttonComponent";
 
 const NavBar: React.FC = () => {
   const { userData, logout } = useContext(AuthContext);
-
+  console.log("userData ==>", userData);
   const [selectedLink, setSelectedLink] = useState<string>("Home");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isProfileOpen, setIsProfileMenuOpen] = useState(false);
@@ -144,7 +144,7 @@ const NavBar: React.FC = () => {
                       >
                         <span className="absolute -inset-1.5"></span>
                         <span className="sr-only">Open user menu</span>
-                        <h1>{userData.fullname}</h1>
+                        <h1>{userData.fullName}</h1>
                       </button>
                     </div>
                   )}
