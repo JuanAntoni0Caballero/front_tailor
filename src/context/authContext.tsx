@@ -11,7 +11,7 @@ interface AuthContextType {
   token: string;
   userData: UserData | null;
   setUserData: (userData: UserData | null) => void;
-  login: (authoToken: string) => void;
+  login: (tailorToken: string) => void;
   logout: () => void;
 }
 
@@ -31,21 +31,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string>("");
   const [userData, setUserData] = useState<UserData | null>(null);
   useEffect(() => {
-    const storedToken = localStorage.getItem("authoToken");
+    const storedToken = localStorage.getItem("tailorToken");
     if (storedToken) {
       setToken(storedToken);
       getUserData(storedToken);
     }
   }, []);
 
-  const getUserData = async (authoToken: string) => {
-    console.log("getUserData");
+  const getUserData = async (tailorToken: string) => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
         {
           headers: {
-            Authorization: `Bearer ${authoToken}`,
+            Authorization: `Bearer ${tailorToken}`,
           },
         }
       );
@@ -62,19 +61,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const login = (authoToken: string) => {
-    if (!authoToken) {
+  const login = (tailorToken: string) => {
+    if (!tailorToken) {
       console.error("Error al hacer login");
     } else {
-      console.log("authoToken ==>", authoToken);
-      localStorage.setItem("authoToken", authoToken);
-      setToken(authoToken);
-      getUserData(authoToken);
+      localStorage.setItem("tailorToken", tailorToken);
+      setToken(tailorToken);
+      getUserData(tailorToken);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("authoToken");
+    localStorage.removeItem("tailorToken");
     setToken("");
     setUserData(null);
   };
