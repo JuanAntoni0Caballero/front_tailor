@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState, useContext } from "react";
 import { AuthContext } from "@/context/authContext";
-import ButtonComponent from "./buttonComponent";
+import ButtonComponent from "../buttonComponent/buttonComponent";
 
 const NavBar: React.FC = () => {
   const { userData, logout } = useContext(AuthContext);
@@ -111,20 +111,36 @@ const NavBar: React.FC = () => {
                       </Link>
                     </>
                   ) : (
-                    <Link
-                      href="/createRestaurant"
-                      className={`${
-                        selectedLink === "New restaurant"
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                      } rounded-md px-3 py-2 text-sm font-medium`}
-                      onClick={() => handleLinkClick("New restaurant")}
-                      aria-current={
-                        selectedLink === "New restaurant" ? "page" : undefined
-                      }
-                    >
-                      New restaurant
-                    </Link>
+                    <>
+                      <Link
+                        href="/createRestaurant"
+                        className={`${
+                          selectedLink === "New restaurant"
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                        } rounded-md px-3 py-2 text-sm font-medium`}
+                        onClick={() => handleLinkClick("New restaurant")}
+                        aria-current={
+                          selectedLink === "New restaurant" ? "page" : undefined
+                        }
+                      >
+                        New restaurant
+                      </Link>
+                      <Link
+                        href="/pruebaMaps"
+                        className={`${
+                          selectedLink === "Prueba Maps"
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                        } rounded-md px-3 py-2 text-sm font-medium`}
+                        onClick={() => handleLinkClick("Prueba Maps")}
+                        aria-current={
+                          selectedLink === "Prueba Maps" ? "page" : undefined
+                        }
+                      >
+                        Prueba Maps
+                      </Link>
+                    </>
                   )}
                 </div>
               </div>
@@ -234,16 +250,32 @@ const NavBar: React.FC = () => {
                   </Link>
                 </>
               ) : (
-                <Link
-                  href="/createRestaurant"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-                  aria-current={
-                    selectedLink === "New restaurant" ? "page" : undefined
-                  }
-                  onClick={() => handleLinkClick("New restaurant")}
-                >
-                  New restaurant
-                </Link>
+                <>
+                  <Link
+                    href="/createRestaurant"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                    aria-current={
+                      selectedLink === "New restaurant" ? "page" : undefined
+                    }
+                    onClick={() => handleLinkClick("New restaurant")}
+                  >
+                    New restaurant
+                  </Link>
+                  <Link
+                    href="/pruebaMaps"
+                    className={`${
+                      selectedLink === "Prueba Maps"
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    } rounded-md px-3 py-2 text-sm font-medium`}
+                    onClick={() => handleLinkClick("Prueba Maps")}
+                    aria-current={
+                      selectedLink === "Prueba Maps" ? "page" : undefined
+                    }
+                  >
+                    Prueba Maps
+                  </Link>
+                </>
               )}
             </div>
           </div>

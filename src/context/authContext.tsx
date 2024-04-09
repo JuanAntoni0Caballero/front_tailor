@@ -9,6 +9,7 @@ interface UserData {
 
 interface AuthContextType {
   token: string;
+  isLogin: boolean;
   userData: UserData | null;
   setUserData: (userData: UserData | null) => void;
   login: (tailorToken: string) => void;
@@ -17,6 +18,7 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType>({
   token: "",
+  isLogin: false,
   userData: null,
   setUserData: () => {},
   login: () => {},
@@ -29,6 +31,7 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string>("");
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   useEffect(() => {
     const storedToken = localStorage.getItem("tailorToken");
@@ -68,6 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       localStorage.setItem("tailorToken", tailorToken);
       setToken(tailorToken);
       getUserData(tailorToken);
+      setIsLogin(true);
     }
   };
 
@@ -75,11 +79,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem("tailorToken");
     setToken("");
     setUserData(null);
+    setIsLogin(false);
   };
 
   return (
     <AuthContext.Provider
-      value={{ token, userData, setUserData, login, logout }}
+      value={{ token, isLogin, userData, setUserData, login, logout }}
     >
       {children}
     </AuthContext.Provider>
