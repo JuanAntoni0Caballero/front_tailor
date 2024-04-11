@@ -1,10 +1,21 @@
 "use client";
-export default function Home() {
+import LogoComponent from "@/components/logoComponent/logoComponent";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+interface HomeProps {}
+const Home: React.FC<HomeProps> = () => {
+  const router = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/welcome");
+    }, 3000);
+  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <h1>Esto es el home</h1>
-      </div>
-    </main>
+    <section className="flex min-h-screen  items-center justify-center p-24 bg-gray-200">
+      <LogoComponent color="black" width={150} height={150} />
+    </section>
   );
-}
+};
+
+export default Home;

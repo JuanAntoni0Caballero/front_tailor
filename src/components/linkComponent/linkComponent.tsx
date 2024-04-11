@@ -14,7 +14,7 @@ const LinkComponent: React.FC<LinkComponentProps> = ({
   className,
 }) => {
   return (
-    <div className="text-grey-dark mt-6">
+    <div className="text-white mt-6">
       {title}
       <Link href={href}>
         <span

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { AuthProvider } from "@/context/authContext";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "../components/navBarComponent/navBarComponent";
 import GoogleMapsLoader from "../components/GoogleMapsLoader/GoogleMapsLoader";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,7 +31,6 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          <NavBar />
           <main className={inter.className}>{children}</main>
         </AuthProvider>
       </body>

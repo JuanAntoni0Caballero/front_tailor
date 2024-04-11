@@ -5,8 +5,8 @@ import ButtonComponent from "../buttonComponent/buttonComponent";
 import LinkComponent from "../linkComponent/linkComponent";
 import AuthService from "@/services/auth.service";
 import ErrorAlert from "@/app/error";
-// import ErrorAlert from "@/app/error";
 import { useRouter } from "next/navigation";
+import LogoComponent from "../logoComponent/logoComponent";
 
 interface SignUpData {
   fullName: string;
@@ -23,6 +23,8 @@ const SignUpForm: React.FC = () => {
     password: "",
     confirm_password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showEmail, setShowEmail] = useState(true);
   const router = useRouter();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,6 +34,14 @@ const SignUpForm: React.FC = () => {
     }));
   };
 
+  const handleNextStep = async () => {
+    if (formData.fullName && formData.email) {
+      setShowEmail(false);
+      setShowPassword(true);
+    } else {
+      setError(["Rellene los campos antes de continuar"]);
+    }
+  };
   const createAccount = async () => {
     const { password, confirm_password } = formData;
     if (password !== confirm_password) {
@@ -40,7 +50,7 @@ const SignUpForm: React.FC = () => {
       try {
         const response = await AuthService.signUp(formData);
         if (response.data) {
-          router.push("/login");
+          router.push("/auth/login");
         } else if (response.error) {
           setError([response.error]);
         }
@@ -52,6 +62,7 @@ const SignUpForm: React.FC = () => {
   };
 
   const inputsGenerate = ({
+    text,
     type,
     name,
     placeholder,
@@ -60,35 +71,70 @@ const SignUpForm: React.FC = () => {
   }: any) => {
     return (
       <InputComponent
+        text={text}
+        textColor="white"
         type={type}
         name={name}
         placeholder={placeholder}
+        placeholderColor="white"
         value={value}
         onChange={onChange}
+        require={true}
       />
     );
   };
 
   return (
-    <div className="bg-grey-lighter min-h-screen flex flex-col">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+    <div
+      style={{ backgroundColor: "#264BEB" }}
+      className="p-10 w-full h-auto rounded-xl m-10 flex flex-col justify-between"
+    >
+      <LogoComponent color="white" width={150} height={150} />
+      {showEmail ? (
+        <ButtonComponent
+          type={"button"}
+          onClick={() => {
+            router.back();
+          }}
+          text={"back"}
+          borderColor="white"
+        />
+      ) : (
+        <ButtonComponent
+          type={"button"}
+          onClick={() => {
+            setShowEmail(true);
+            setShowPassword(false);
+          }}
+          text={"back"}
+          borderColor="white"
+        />
+      )}
+
+      {showEmail && (
+        <>
           {inputsGenerate({
-            type: "text",
-            name: "fullName",
-            placeholder: "Full Name",
-            value: formData.fullName,
-            onChange: handleInputChange,
-          })}
-          {inputsGenerate({
+            text: "Email:",
             type: "text",
             name: "email",
-            placeholder: "Email",
+            placeholder: "Añade tu email",
             value: formData.email,
             onChange: handleInputChange,
           })}
           {inputsGenerate({
+            text: "Nombre de usuario:",
+            type: "text",
+            name: "fullName",
+            placeholder: "Añade tu nombre",
+            value: formData.fullName,
+            onChange: handleInputChange,
+          })}
+        </>
+      )}
+      {showPassword && (
+        <>
+          {inputsGenerate({
+            text: "Crea una contraseña nueva:",
             type: "password",
             name: "password",
             placeholder: "Password",
@@ -96,25 +142,39 @@ const SignUpForm: React.FC = () => {
             onChange: handleInputChange,
           })}
           {inputsGenerate({
+            text: "Confirma tu contraseña:",
             type: "password",
             name: "confirm_password",
-            placeholder: "Confirm Password",
+            placeholder: "Password",
             value: formData.confirm_password,
             onChange: handleInputChange,
           })}
-          <ButtonComponent
-            type={"button"}
-            onClick={createAccount}
-            text={"Create Account"}
-          />
-        </div>
-        <LinkComponent
-          title={" Already have an account?"}
-          href={"../login/"}
-          text={"Log in"}
-          className=""
+        </>
+      )}
+      {showEmail ? (
+        <ButtonComponent
+          type={"button"}
+          onClick={handleNextStep}
+          text={"Siguiente"}
+          textColor="white"
+          borderColor="white"
         />
-      </div>
+      ) : (
+        <ButtonComponent
+          type={"button"}
+          onClick={createAccount}
+          text={"Finalizar"}
+          textColor="white"
+          borderColor="white"
+        />
+      )}
+
+      <LinkComponent
+        title={" Already have an account? "}
+        href={"/auth/login"}
+        text={"Log in"}
+        className="text-white"
+      />
       {error && <ErrorAlert error={error} />}
     </div>
   );

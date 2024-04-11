@@ -7,6 +7,7 @@ import { AuthContext } from "@/context/authContext";
 import AuthService from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import ErrorAlert from "@/app/error";
+import LogoComponent from "../logoComponent/logoComponent";
 
 interface LoginData {
   email: string;
@@ -55,6 +56,7 @@ const LoginForm: React.FC = () => {
   };
 
   const inputsGenerate = ({
+    text,
     type,
     name,
     placeholder,
@@ -63,47 +65,53 @@ const LoginForm: React.FC = () => {
   }: any) => {
     return (
       <InputComponent
+        text={text}
+        textColor="white"
         type={type}
         name={name}
         placeholder={placeholder}
+        placeholderColor="white"
         value={value}
         onChange={onChange}
+        require={true}
       />
     );
   };
 
   return (
-    <div className="bg-grey-lighter min-h-screen flex flex-col">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-8 text-3xl text-center">Log in</h1>
-          {inputsGenerate({
-            type: "text",
-            name: "email",
-            placeholder: "Email",
-            value: formData.email,
-            onChange: handleInputChange,
-          })}
-          {inputsGenerate({
-            type: "password",
-            name: "password",
-            placeholder: "Password",
-            value: formData.password,
-            onChange: handleInputChange,
-          })}
-          <ButtonComponent
-            type={"button"}
-            onClick={handleLogin}
-            text={"Log in"}
-          />
-        </div>
-        <LinkComponent
-          title={" Don't have an account yet?"}
-          href={"./signup"}
-          text={"Sign up"}
-          className=""
-        />
-      </div>
+    <div
+      style={{ backgroundColor: "#264BEB" }}
+      className="p-10 w-full h-auto rounded-xl m-10 flex flex-col justify-between"
+    >
+      <LogoComponent color="white" width={150} height={150} />
+      <LinkComponent
+        title={"¿No tienes cuenta? "}
+        href={"/auth/signin"}
+        text={"Regístrate"}
+        className=""
+      />
+      {inputsGenerate({
+        text: "Email:",
+        type: "email",
+        name: "email",
+        placeholder: "Email",
+        value: formData.email,
+        onChange: handleInputChange,
+      })}
+      {inputsGenerate({
+        text: "Contraseña:",
+        type: "password",
+        name: "password",
+        placeholder: "Password",
+        value: formData.password,
+        onChange: handleInputChange,
+      })}
+      <ButtonComponent
+        type={"button"}
+        onClick={handleLogin}
+        text={"Entrar"}
+        textColor="white"
+      />
       {error && <ErrorAlert error={error} />}
     </div>
   );

@@ -1,28 +1,34 @@
 import React from "react";
+import ArrowLeft from "../../../public/arrow-left.svg";
+import Image from "next/image";
 
 interface ButtonComponentProps {
   type: "button" | "submit";
   onClick?: () => void;
-  text: string;
-  className?: string;
+  text: string | any;
+  textColor?: string;
+  borderColor?: string;
 }
 
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
   type,
   text,
   onClick,
-  className,
+  textColor,
+  borderColor,
 }) => {
+  const className = `w-20 px-4 text-center py-1 rounded block border border-1 rounded-xl bg-green focus:outline-none my-1`;
   return (
     <button
       onClick={onClick}
       type={type}
-      className={
-        className ||
-        "w-full text-center py-3 rounded block border border-grey-light bg-green text-black focus:outline-none my-1"
-      }
+      className={`${className} text-${textColor} border-${borderColor}`}
     >
-      {text}
+      {text !== "back" ? (
+        text
+      ) : (
+        <Image src={ArrowLeft} alt="logo" width={100} height={100} />
+      )}
     </button>
   );
 };

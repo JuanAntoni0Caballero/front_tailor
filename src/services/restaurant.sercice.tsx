@@ -29,21 +29,23 @@ const createRestaurant = async (
   }
 };
 
-// const getMarkets = async (): Promise<any> => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/market/getMarkets`
-//     );
-//     if (!response.ok) {
-//       console.log("Error en la respuesta del servidor al obtener los markets");
-//     } else {
-//       const data = await response.json();
-//       return data;
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const getAllRestaurant = async (): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/getAllRestaurant`
+    );
+    if (!response.ok) {
+      console.log(
+        "Error en la respuesta del servidor al obtener los restaurantes"
+      );
+    } else {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // const getOneMarket = async (market_id: string): Promise<any> => {
 //   try {
@@ -109,7 +111,7 @@ const createRestaurant = async (
 
 const restaurantService = {
   createRestaurant,
-  //   getMarkets,
+  getAllRestaurant,
   //   getOneMarket,
   //   editMarket,
   //   deleteMarket,
