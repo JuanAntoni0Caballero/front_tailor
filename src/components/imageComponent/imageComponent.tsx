@@ -1,14 +1,11 @@
-import Image from "next/image";
+import Image, { ImageProps as NextImageProps } from "next/image";
 
-interface ImageProps {
+interface ImageComponentProps extends NextImageProps {
   alt: string;
-  src: string;
-  width: number | string;
-  height: number | string;
 }
-const ImageComponent: React.FC<ImageProps> = ({ alt, src, width, height }) => {
-  return (
-    <Image alt={alt} src={src} width={Number(width)} height={Number(height)} />
-  );
+
+const ImageComponent: React.FC<ImageComponentProps> = ({ alt, ...rest }) => {
+  return <Image className="object-cover w-full h-full" alt={alt} {...rest} />;
 };
+
 export default ImageComponent;

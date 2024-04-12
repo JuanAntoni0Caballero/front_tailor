@@ -7,7 +7,7 @@ import NavBar from "@/components/navBarComponent/navBarComponent";
 
 const MapPage: React.FC = () => {
   return (
-    <div className="max-h-screen">
+    <section className="max-h-screen">
       <NavBar />
       <PageComponent
         leftSide={
@@ -16,11 +16,12 @@ const MapPage: React.FC = () => {
             height={800}
             alt="Welcome image"
             src={MapImage}
+            className="rounder-xl"
           />
         }
         rightSide={<RestaurantList />}
       />
-    </div>
+    </section>
   );
 };
 

@@ -22,16 +22,3 @@ const Welcome: React.FC<WelcomeProps> = () => {
 };
 
 export default Welcome;
-{
-  /* <div className="flex items-end justify-center  w-1/2 h-screen ">
-        <WelcomeCard />
-      </div>
-      <div className="flex items-center justify-center w-1/2 h-screen">
-        <ImageComponent
-          width={700}
-          height={800}
-          alt="Welcome image"
-          src={welcomeImage}
-        />
-      </div> */
-}

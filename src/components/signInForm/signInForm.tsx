@@ -170,10 +170,9 @@ const SignUpForm: React.FC = () => {
       )}
 
       <LinkComponent
-        title={" Already have an account? "}
+        title={" ¿Ya tienes cuenta? "}
         href={"/auth/login"}
-        text={"Log in"}
-        className="text-white"
+        text={"Inicia sesión"}
       />
       {error && <ErrorAlert error={error} />}
     </div>

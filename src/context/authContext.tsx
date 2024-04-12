@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface UserData {
@@ -33,11 +34,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string>("");
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const router = useRouter();
   useEffect(() => {
     const storedToken = localStorage.getItem("tailorToken");
     if (storedToken) {
       setToken(storedToken);
       getUserData(storedToken);
+    } else {
+      // router.push("/auth/login");
+      return;
     }
   }, []);
 
@@ -56,11 +61,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const userData = await response.json();
         setUserData(userData);
       } else {
-        window.location.href = "/login";
-        console.error("Error al obtener los datos del usuario");
+        // router.push("/auth/login");
+        return;
       }
     } catch (error) {
-      console.error(error);
+      // router.push("/auth/login");
+      return;
     }
   };
 

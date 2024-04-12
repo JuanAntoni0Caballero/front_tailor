@@ -4,24 +4,14 @@ interface LinkComponentProps {
   title: string;
   href: string;
   text: string;
-  className: string;
 }
 
-const LinkComponent: React.FC<LinkComponentProps> = ({
-  title,
-  href,
-  text,
-  className,
-}) => {
+const LinkComponent: React.FC<LinkComponentProps> = ({ title, href, text }) => {
   return (
-    <div className="text-white mt-6">
+    <div className="text-white">
       {title}
       <Link href={href}>
-        <span
-          className={className || "no-underline border-b border-blue text-blue"}
-        >
-          {text}
-        </span>
+        <span>{text}</span>
       </Link>
       .
     </div>

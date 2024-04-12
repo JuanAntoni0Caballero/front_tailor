@@ -1,7 +1,7 @@
 interface RestaurantData {
   name: string;
   description: string;
-  city: string;
+  direction: string;
 }
 
 const createRestaurant = async (
@@ -47,21 +47,23 @@ const getAllRestaurant = async (): Promise<any> => {
   }
 };
 
-// const getOneMarket = async (market_id: string): Promise<any> => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/market/getOneMarket/${market_id}`
-//     );
-//     if (!response.ok) {
-//       console.log("Error en la respuesta del servidor al recuperar el market");
-//     } else {
-//       const code = await response.json();
-//       return code;
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const getOneRestaurant = async (restaurant_id: string): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/getOneRestaurant/${restaurant_id}`
+    );
+    if (!response.ok) {
+      console.log(
+        "Error en la respuesta del servidor al recuperar el restaurant"
+      );
+    } else {
+      const code = await response.json();
+      return code;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // const editMarket = async (
 //   market_id: string,
@@ -112,7 +114,7 @@ const getAllRestaurant = async (): Promise<any> => {
 const restaurantService = {
   createRestaurant,
   getAllRestaurant,
-  //   getOneMarket,
+  getOneRestaurant,
   //   editMarket,
   //   deleteMarket,
 };

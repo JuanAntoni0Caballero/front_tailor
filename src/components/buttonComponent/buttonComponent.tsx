@@ -17,7 +17,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
   textColor,
   borderColor,
 }) => {
-  const className = `w-20 px-4 text-center py-1 rounded block border border-1 rounded-xl bg-green focus:outline-none my-1`;
+  const className = `px-4 text-center py-1 rounded block border border-1 rounded-xl bg-green focus:outline-none my-1`;
   return (
     <button
       onClick={onClick}

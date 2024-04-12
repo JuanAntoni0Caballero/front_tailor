@@ -7,6 +7,7 @@ interface InputComponentProps {
   name: string;
   placeholder: string;
   placeholderColor: string;
+  borderColor: string;
   value: string;
   require: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,6 +20,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
   name,
   placeholder,
   placeholderColor,
+  borderColor,
   value,
   onChange,
   require,
@@ -28,7 +30,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
       <p className={`text-${textColor}`}>{text}</p>
       <input
         type={type}
-        className={`block border border-grey-light w-full p-2 rounded-full mb-4 bg-transparent placeholder:text-${placeholderColor}`}
+        className={`block border border-${borderColor} w-full p-2 rounded-full mb-4 bg-transparent placeholder:text-${placeholderColor}`}
         name={name}
         value={value}
         placeholder={placeholder}

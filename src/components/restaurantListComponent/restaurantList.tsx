@@ -1,12 +1,20 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import RestaurantService from "@/services/restaurant.sercice";
 import ErrorAlert from "@/app/error";
 import { useRouter } from "next/navigation";
+import RestaurantCard from "../restaurantCard/restaurantCard";
+
+interface Restaurant {
+  name: string;
+  description: string;
+}
+
 const RestaurantList: React.FC = () => {
   const [error, setError] = useState<string[]>([]);
-  const [data, setData] = useState<object[]>([]);
-  console.log("la data ==>", data);
+  const [restaurantData, setRestaurantData] = useState<Restaurant[]>([]);
+
   const router = useRouter();
   useEffect(() => {
     getRestaurant();
@@ -18,7 +26,7 @@ const RestaurantList: React.FC = () => {
       if (response.error) {
         setError(response.error);
       } else {
-        setData(response);
+        setRestaurantData(response);
       }
     } catch (err) {
       setError(["Error al crear el restaurante"]);
@@ -27,7 +35,7 @@ const RestaurantList: React.FC = () => {
   };
   return (
     <div>
-      <h1>Restaurant list</h1>
+      <RestaurantCard restaurantData={restaurantData} />
       {error && <ErrorAlert error={error} />}
     </div>
   );

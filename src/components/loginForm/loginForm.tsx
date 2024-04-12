@@ -45,7 +45,7 @@ const LoginForm: React.FC = () => {
       const response = await AuthService.login(formData);
       if (response.token) {
         login(response.token);
-        router.push("/");
+        router.push("/map");
       } else if (response.error) {
         setError([response.error]);
       }
@@ -88,7 +88,6 @@ const LoginForm: React.FC = () => {
         title={"¿No tienes cuenta? "}
         href={"/auth/signin"}
         text={"Regístrate"}
-        className=""
       />
       {inputsGenerate({
         text: "Email:",
