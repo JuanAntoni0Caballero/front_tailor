@@ -66,10 +66,8 @@ const CreateRestaurantForm: React.FC = () => {
     value,
     onChange,
     text,
-    textColor,
-    placeholderColor,
-    borderColor,
     require,
+    bgColor,
   }: any) => {
     return (
       <div>
@@ -84,6 +82,7 @@ const CreateRestaurantForm: React.FC = () => {
           textColor="black"
           placeholderColor="white"
           require={true}
+          bgColor="white"
         />
       </div>
     );

@@ -9,6 +9,7 @@ interface InputComponentProps {
   borderColor: string;
   value: string;
   require: boolean;
+  bgColor: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -23,20 +24,25 @@ const InputComponent: React.FC<InputComponentProps> = ({
   value,
   onChange,
   require,
+  bgColor,
 }) => {
   return (
-    <div>
-      <p className={`text-${textColor} text-base md:text-lg`}>{text}</p>
-      <input
-        type={type}
-        className={`block border border-${borderColor} text-base md:text-lg w-full p-2 rounded-full mb-4 bg-transparent placeholder:text-${placeholderColor}`}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        required={require}
-      />
-    </div>
+    console.log("bgColor ==>", bgColor),
+    (
+      <div>
+        <p className={`text-${textColor} text-base md:text-lg`}>{text}</p>
+        <input
+          style={{ backgroundColor: bgColor }}
+          type={type}
+          className={`block border border-${borderColor} text-base md:text-lg w-full p-2 rounded-full mb-4 placeholder:text-${placeholderColor}`}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          required={require}
+        />
+      </div>
+    )
   );
 };
 
