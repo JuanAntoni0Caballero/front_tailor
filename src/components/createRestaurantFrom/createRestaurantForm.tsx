@@ -104,9 +104,7 @@ const CreateRestaurantForm: React.FC = () => {
                 htmlFor="imageInput"
                 className="absolute inset-0 flex items-center justify-center cursor-pointer"
               >
-                <span className="bg-white px-4 py-2 rounded-lg border border-black">
-                  Añadir imagen
-                </span>
+                <span className="px-4 py-2">Añadir imagen</span>
               </label>
             )}
 
@@ -121,11 +119,12 @@ const CreateRestaurantForm: React.FC = () => {
             {formData.image && (
               <>
                 <div className="absolute inset-0 overflow-hidden rounded-xl">
-                  <ImageComponent
+                  <Image
                     src={URL.createObjectURL(formData.image)}
                     alt="Preview"
                     width={10000}
                     height={10000}
+                    className="object-cover w-full h-full rounded-2xl"
                   />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center text-white px-4 py-2 rounded-lg borde">

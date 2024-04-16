@@ -45,7 +45,7 @@ const LoginForm: React.FC = () => {
       const response = await AuthService.login(formData);
       if (response.token) {
         login(response.token);
-        router.push("/map");
+        router.push("/restaurant/list");
       } else if (response.error) {
         setError([response.error]);
       }
@@ -67,6 +67,7 @@ const LoginForm: React.FC = () => {
       <InputComponent
         text={text}
         textColor="white"
+        borderColor="white"
         type={type}
         name={name}
         placeholder={placeholder}
@@ -81,7 +82,7 @@ const LoginForm: React.FC = () => {
   return (
     <div
       style={{ backgroundColor: "#264BEB" }}
-      className="p-10 w-full h-auto rounded-xl m-10 flex flex-col justify-between"
+      className="p-10 w-full h-auto rounded-xl mb-10 flex flex-col justify-between"
     >
       <LogoComponent color="white" width={150} height={150} />
       <LinkComponent

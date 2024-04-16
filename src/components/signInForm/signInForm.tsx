@@ -77,6 +77,7 @@ const SignUpForm: React.FC = () => {
         name={name}
         placeholder={placeholder}
         placeholderColor="white"
+        borderColor="white"
         value={value}
         onChange={onChange}
         require={true}
@@ -87,7 +88,7 @@ const SignUpForm: React.FC = () => {
   return (
     <div
       style={{ backgroundColor: "#264BEB" }}
-      className="p-10 w-full h-auto rounded-xl m-10 flex flex-col justify-between"
+      className="p-10 w-full rounded-xl mb-10 flex flex-col justify-between"
     >
       <LogoComponent color="white" width={150} height={150} />
       {showEmail ? (
@@ -112,7 +113,7 @@ const SignUpForm: React.FC = () => {
       )}
 
       {showEmail && (
-        <>
+        <div className="pt-4">
           {inputsGenerate({
             text: "Email:",
             type: "text",
@@ -129,7 +130,7 @@ const SignUpForm: React.FC = () => {
             value: formData.fullName,
             onChange: handleInputChange,
           })}
-        </>
+        </div>
       )}
       {showPassword && (
         <>

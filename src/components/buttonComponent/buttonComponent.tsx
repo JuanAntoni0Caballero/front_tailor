@@ -17,17 +17,19 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
   textColor,
   borderColor,
 }) => {
-  const className = `px-4 text-center py-1 rounded block border border-1 rounded-xl bg-green focus:outline-none my-1`;
+  const textSizeClass = "text-base md:text-lg";
+
+  const className = `px-4 text-center py-1 rounded block border border-1 rounded-xl bg-green focus:outline-none my-1 ${textSizeClass}`;
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`${className} text-${textColor} border-${borderColor}`}
+      className={`${className} text-${textColor} border-${borderColor} h-fit w-fit`}
     >
       {text !== "back" ? (
         text
       ) : (
-        <Image src={ArrowLeft} alt="logo" width={100} height={100} />
+        <Image src={ArrowLeft} alt="logo" width={30} height={30} />
       )}
     </button>
   );

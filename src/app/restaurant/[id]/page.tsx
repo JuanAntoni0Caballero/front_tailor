@@ -1,7 +1,7 @@
 import RestaurantDetail from "@/components/restaurantDetail/restaurantDatail";
 
 interface RestaurantDetailPageProps {
-  params: { id: string };
+  params: { id: number };
 }
 
 const RestaurantDetailPage: React.FC<RestaurantDetailPageProps> = ({

@@ -8,7 +8,7 @@ interface LinkComponentProps {
 
 const LinkComponent: React.FC<LinkComponentProps> = ({ title, href, text }) => {
   return (
-    <div className="text-white">
+    <div className="text-white text-base md:text-lg">
       {title}
       <Link href={href}>
         <span>{text}</span>

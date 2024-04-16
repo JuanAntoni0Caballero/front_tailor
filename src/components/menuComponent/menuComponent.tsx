@@ -6,6 +6,7 @@ import ArrowUp from "../../../public/arrow-up.svg";
 import { AuthContext } from "@/context/authContext";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import LinkComponent from "../linkComponent/linkComponent";
+import Image from "next/image";
 
 interface MenuComponentProps {}
 
@@ -23,20 +24,19 @@ const MenuComponent: React.FC<MenuComponentProps> = () => {
     setIsProfileMenuOpen(false);
     logout();
   };
-
   return (
-    <div className="relative ml-auto">
+    <div className=" ml-auto z-50">
       <button
-        className="relative flex bg-transparent text-sm"
+        className="flex justify-center items-center h-10 text-sm"
         onClick={handleProfileOpen}
       >
-        <h1>{userData?.fullName}</h1>
-        <ImageComponent src={img} alt="arrow icon" width={20} height={20} />
+        <h1 className="text-black">{userData?.fullName}</h1>
+        <Image src={img} alt="arrow icon" width={25} height={25} />
       </button>
       {isProfileOpen && (
         <div
           style={{ backgroundColor: "#264BEB", borderRadius: "8px 0 8px 8px" }}
-          className="absolute right-0 m-2 w-48 h-40 origin-top-right py-5 px-2 flex flex-col justify-between"
+          className="absolute right-0 w-48 h-40 py-5 px-2 flex flex-col justify-between"
         >
           <div>
             <LinkComponent href="#" text="Panel de control" title="" />

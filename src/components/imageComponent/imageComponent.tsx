@@ -5,7 +5,14 @@ interface ImageComponentProps extends NextImageProps {
 }
 
 const ImageComponent: React.FC<ImageComponentProps> = ({ alt, ...rest }) => {
-  return <Image className="object-cover w-full h-full" alt={alt} {...rest} />;
+  return (
+    <Image
+      style={{ height: "90%" }}
+      className="object-cover w-full rounded-2xl mb-10"
+      alt={alt}
+      {...rest}
+    />
+  );
 };
 
 export default ImageComponent;

@@ -31,7 +31,7 @@ const CreateRestaurantResponse: React.FC<CreateRestaurantResponseProps> = ({
                 text={"Ver restaurantes"}
                 borderColor="black"
                 onClick={() => {
-                  router.push("/map");
+                  router.push("/restaurant/list");
                 }}
               />
             </div>

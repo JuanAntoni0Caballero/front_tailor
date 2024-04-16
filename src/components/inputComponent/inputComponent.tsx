@@ -26,18 +26,18 @@ const InputComponent: React.FC<InputComponentProps> = ({
   require,
 }) => {
   return (
-    <>
-      <p className={`text-${textColor}`}>{text}</p>
+    <div>
+      <p className={`text-${textColor} text-base md:text-lg`}>{text}</p>
       <input
         type={type}
-        className={`block border border-${borderColor} w-full p-2 rounded-full mb-4 bg-transparent placeholder:text-${placeholderColor}`}
+        className={`block border border-${borderColor} text-base md:text-lg w-full p-2 rounded-full mb-4 bg-transparent placeholder:text-${placeholderColor}`}
         name={name}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
         required={require}
       />
-    </>
+    </div>
   );
 };
 

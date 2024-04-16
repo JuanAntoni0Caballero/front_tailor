@@ -47,7 +47,7 @@ const getAllRestaurant = async (): Promise<any> => {
   }
 };
 
-const getOneRestaurant = async (restaurant_id: string): Promise<any> => {
+const getOneRestaurant = async (restaurant_id: number): Promise<any> => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/restaurant/getOneRestaurant/${restaurant_id}`
@@ -57,66 +57,121 @@ const getOneRestaurant = async (restaurant_id: string): Promise<any> => {
         "Error en la respuesta del servidor al recuperar el restaurant"
       );
     } else {
-      const code = await response.json();
-      return code;
+      const data = await response.json();
+      return data;
     }
   } catch (error) {
     console.error(error);
   }
 };
 
-// const editMarket = async (
-//   market_id: string,
-//   marketData: RestaurantData
-// ): Promise<any> => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/market/editMarket/${market_id}`,
-//       {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(marketData),
-//       }
-//     );
-//     if (!response.ok) {
-//       console.log("Error en la respuesta del servidor al editar el market");
-//     } else {
-//       const code = await response.json();
-//       return code;
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const editRestaurant = async (
+  restaurant_id: number,
+  restaurantData: RestaurantData
+): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/editRestaurant/${restaurant_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(restaurantData),
+      }
+    );
+    if (!response.ok) {
+      console.log("Error en la respuesta del servidor al editar el restaurant");
+    } else {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// const deleteMarket = async (market_id: string): Promise<any> => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/market/deleteMarket/${market_id}`,
-//       {
-//         method: "DELETE",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     if (!response.ok) {
-//       console.log("Error en la respuesta del servidor al eliminar el market");
-//     }
-//     return response;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const deleteRestaurant = async (restaurant_id: number): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/deleteRestaurant/${restaurant_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      console.log(
+        "Error en la respuesta del servidor al eliminar el restaurant"
+      );
+    }
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const likedRestaurant = async (
+  restaurant_id: number,
+  user_id: string
+): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/likedRestaurant/${restaurant_id}/${user_id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      console.log(
+        "Error en la respuesta del servidor al eliminar el restaurant"
+      );
+    }
+    return response;
+  } catch (err) {
+    console.log("error ==>", err);
+  }
+};
+
+const unLikedRestaurant = async (
+  restaurant_id: number,
+  user_id: string
+): Promise<any> => {
+  try {
+    console.log("restaurant_id ==>", typeof restaurant_id);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurant/unlikedRestaurant/${restaurant_id}/${user_id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      console.log(
+        "Error en la respuesta del servidor al eliminar el restaurant"
+      );
+    }
+    return response;
+  } catch (err) {
+    console.log("error ==>", err);
+  }
+};
 
 const restaurantService = {
   createRestaurant,
   getAllRestaurant,
   getOneRestaurant,
-  //   editMarket,
-  //   deleteMarket,
+  editRestaurant,
+  deleteRestaurant,
+  likedRestaurant,
+  unLikedRestaurant,
 };
 
 export default restaurantService;

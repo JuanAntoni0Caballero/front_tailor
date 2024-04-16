@@ -3,9 +3,10 @@ import { useRouter } from "next/navigation";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface UserData {
-  id: number;
+  _id: string;
   fullName: string;
   email: string;
+  favoritedRestaurants: number[];
 }
 
 interface AuthContextType {
@@ -86,6 +87,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken("");
     setUserData(null);
     setIsLogin(false);
+    router.push("/auth/login");
   };
 
   return (

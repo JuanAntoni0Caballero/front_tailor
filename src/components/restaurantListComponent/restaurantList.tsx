@@ -1,21 +1,29 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
+import ImageComponent from "../imageComponent/imageComponent";
+import Link from "next/link";
+import starImage from "../../../public/star.svg";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import RestaurantService from "@/services/restaurant.sercice";
 import ErrorAlert from "@/app/error";
-import { useRouter } from "next/navigation";
-import RestaurantCard from "../restaurantCard/restaurantCard";
 
-interface Restaurant {
+interface Review {
+  rating: number;
+}
+
+interface RestaurantData {
   name: string;
-  description: string;
+  address: string;
+  reviews: Review[];
+  image: string;
+  id: number;
 }
 
 const RestaurantList: React.FC = () => {
   const [error, setError] = useState<string[]>([]);
-  const [restaurantData, setRestaurantData] = useState<Restaurant[]>([]);
+  const [restaurantData, setRestaurantData] = useState<RestaurantData[]>([]);
 
-  const router = useRouter();
   useEffect(() => {
     getRestaurant();
   }, []);
@@ -30,12 +38,65 @@ const RestaurantList: React.FC = () => {
       }
     } catch (err) {
       setError(["Error al crear el restaurante"]);
-      console.error("Error al crear el restaurante:", err);
     }
   };
+  const averageReviews = (reviews: Review[]) => {
+    if (reviews.length === 0)
+      return (
+        <div>
+          <h1>No hay valoraciones</h1>
+        </div>
+      );
+    const totalRating = reviews.reduce((acc, curr) => acc + curr.rating, 0);
+    const average = Math.ceil(totalRating / reviews.length);
+
+    const starImages = [];
+    for (let i = 0; i < average; i++) {
+      starImages.push(
+        <Image width={25} height={25} src={starImage} alt="Star" key={i} />
+      );
+    }
+
+    return <div className="flex">{starImages}</div>;
+  };
+
   return (
-    <div>
-      <RestaurantCard restaurantData={restaurantData} />
+    <div className="h-auto flex flex-col">
+      {restaurantData?.map((restaurant, i) => {
+        return (
+          <Link
+            href={`/restaurant/${restaurant.id}`}
+            key={i}
+            className="flex items-center w-full mb-4"
+          >
+            <div className="mr-4">
+              <ImageComponent
+                src={restaurant.image}
+                alt={"restaurant image"}
+                width={100}
+                height={100}
+                className="rounded-lg"
+              />
+            </div>
+            <div className="ml-4">
+              <div className="mb-2">
+                <h1 className="text-xl font-bold mb-1 md:text-lg">
+                  {restaurant.name}
+                </h1>
+                <p className="text-gray-600 text-base md:text-sm">
+                  {restaurant.address}
+                </p>
+              </div>
+              <div className="flex flex-row items-center justify-between">
+                {averageReviews(restaurant.reviews)}
+                <p className="text-base md:text-sm">
+                  ({restaurant.reviews.length} comentarios)
+                </p>
+              </div>
+            </div>
+          </Link>
+        );
+      })}
       {error && <ErrorAlert error={error} />}
     </div>
   );
