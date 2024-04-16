@@ -1,25 +1,8 @@
-// import RestaurantDetail from "../../../app/components/restaurantDetail/restaurantDatail";
-// import "../../../app/globals.css";
-
-// interface RestaurantDetailPageProps {
-//   params: { id: number };
-// }
-
-// const RestaurantDetailPage: React.FC<RestaurantDetailPageProps> = ({
-//   params,
-// }) => {
-//   console.log("params ==>", params);
-//   return <RestaurantDetail params={params} />;
-// };
-
-// export default RestaurantDetailPage;
-
-import RestaurantDetail from "../../components/restaurantDetail/restaurantDatail";
+import RestaurantDetail from "../../src/components/restaurantDetail/restaurantDatail";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import RestaurantService from "../../services/restaurant.sercice";
+import RestaurantService from "../../src/services/restaurant.sercice";
 import ErrorAlert from "../../error";
-
 interface Review {
   id: number;
   name: string;

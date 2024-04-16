@@ -1,8 +1,8 @@
 import React from "react";
-import LoginForm from "../../components/loginForm/loginForm";
-import ImageComponent from "../../components/imageComponent/imageComponent";
+import LoginForm from "../../src/components/loginForm/loginForm";
+import ImageComponent from "../../src/components/imageComponent/imageComponent";
 import loginImage from "../../../public/login_img.svg";
-import PageComponent from "../../components/pageComponent/pageComponent";
+import PageComponent from "../../src/components/pageComponent/pageComponent";
 
 const LoginPage: React.FC = () => {
   return (

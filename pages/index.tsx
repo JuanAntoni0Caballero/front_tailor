@@ -1,5 +1,5 @@
 "use client";
-import LogoComponent from "./components/logoComponent/logoComponent";
+import LogoComponent from "./src/components/logoComponent/logoComponent";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

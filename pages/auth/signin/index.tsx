@@ -1,8 +1,8 @@
 import React from "react";
-import SignInForm from "../../components/signInForm/signInForm";
-import ImageComponent from "../../components/imageComponent/imageComponent";
+import SignInForm from "../../src/components/signInForm/signInForm";
+import ImageComponent from "../../src/components/imageComponent/imageComponent";
 import signInImage from "../../../public/signIn_img.svg";
-import PageComponent from "../../components/pageComponent/pageComponent";
+import PageComponent from "../../src/components/pageComponent/pageComponent";
 
 const SignUpPage: React.FC = () => {
   return (
