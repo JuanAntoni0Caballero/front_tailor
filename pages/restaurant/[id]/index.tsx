@@ -1,7 +1,7 @@
 import RestaurantDetail from "../../src/components/restaurantDetail/restaurantDatail";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import RestaurantService from "../../src/services/restaurant.sercice";
+import RestaurantService from "../../src/services/restaurant.service";
 import ErrorAlert from "../../error";
 interface Review {
   id: number;

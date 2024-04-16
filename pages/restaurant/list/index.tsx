@@ -3,7 +3,7 @@ import ImageComponent from "../../src/components/imageComponent/imageComponent";
 import MapImage from "../../../public/map_img.svg";
 import RestaurantList from "../../src/components/restaurantListComponent/restaurantList";
 import NavBar from "../../src/components/navBarComponent/navBarComponent";
-import RestaurantService from "../../src/services/restaurant.sercice";
+import RestaurantService from "../../src/services/restaurant.service";
 
 interface ListPageProps {
   restaurantData: any[];
@@ -40,7 +40,7 @@ export async function getServerSideProps() {
       return { props: { restaurantData: response } };
     }
   } catch (err) {
-    return { props: { error: ["Error al crear el restaurante"] } };
+    return { props: { error: ["Error al recuperar los restaurantes"] } };
   }
 }
 

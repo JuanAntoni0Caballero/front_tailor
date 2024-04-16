@@ -6,7 +6,8 @@ import restaurantIsLiked from "../../utils/restaurantLiked";
 import starGenerator from "../../utils/starGenerator";
 import NewCommentBox from "../newCommentBoxComponent/newCommentBox";
 import RestaurantDetailButtons from "../restaurantDetailsButtons/restaurantDetailsButtons";
-
+import RestaurantService from "../../services/restaurant.service";
+import { useRouter } from "next/navigation";
 interface Review {
   id: number;
   name: string;
@@ -30,6 +31,18 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({
   restaurantData,
 }) => {
   const { userData } = useContext(AuthContext);
+  const router = useRouter();
+
+  const deleteRestaurant = async () => {
+    const response = await RestaurantService.deleteRestaurant(
+      restaurantData.id
+    );
+    if (response.ok) {
+      router.push("/restaurant/list");
+    } else {
+      console.log("Error al eliminar el restaurante.");
+    }
+  };
 
   return (
     <section className="min-h-screen">
@@ -89,7 +102,10 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({
                   </div>
                 ))}
               </div>
-              <RestaurantDetailButtons />
+              <RestaurantDetailButtons
+                restaurantId={restaurantData.id}
+                deleteRestaurant={deleteRestaurant}
+              />
             </div>
             <div className="md:w-1/3 mt-6 md:mt-0 md:ml-6">
               <NewCommentBox />

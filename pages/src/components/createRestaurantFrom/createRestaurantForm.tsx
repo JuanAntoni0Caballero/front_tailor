@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import InputComponent from "../inputComponent/inputComponent";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import ErrorAlert from "../../../error";
-import RestaurantService from "../../services/restaurant.sercice";
+import RestaurantService from "../../services/restaurant.service";
 import Image from "next/image";
 import LogoComponent from "../logoComponent/logoComponent";
 import NavBar from "../navBarComponent/navBarComponent";
