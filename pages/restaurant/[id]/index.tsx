@@ -1,8 +1,8 @@
-import RestaurantDetail from "../../src/components/restaurantDetail/restaurantDatail";
+import RestaurantDetail from "../../../src/components/restaurantDetail/restaurantDatail";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import RestaurantService from "../../src/services/restaurant.service";
-import ErrorAlert from "../../error";
+import RestaurantService from "../../../src/services/restaurant.service";
+import ErrorAlert from "../../../src/components/errorComponent/error";
 interface Review {
   id: number;
   name: string;

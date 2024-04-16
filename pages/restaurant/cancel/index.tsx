@@ -1,5 +1,5 @@
 import React from "react";
-import CreateRestaurantResponse from "../../src/components/createRestaurantResponse/createRestaurantResponse";
+import CreateRestaurantResponse from "../../../src/components/createRestaurantResponse/createRestaurantResponse";
 
 const CancelPage: React.FC = () => {
   return (

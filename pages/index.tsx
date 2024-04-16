@@ -1,4 +1,4 @@
-import LogoComponent from "./src/components/logoComponent/logoComponent";
+import LogoComponent from "../src/components/logoComponent/logoComponent";
 import Link from "next/link";
 
 interface HomeProps {}

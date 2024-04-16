@@ -1,7 +1,7 @@
 import Image from "next/image";
 import RestaurantService from "../services/restaurant.service";
-import LikeImg from "../../../public/like.svg";
-import LikedImg from "../../../public/liked.svg";
+import LikeImg from "../../public/like.svg";
+import LikedImg from "../../public/liked.svg";
 interface RestaurantIsLikedProps {
   restaurantData: any;
   userData: any;

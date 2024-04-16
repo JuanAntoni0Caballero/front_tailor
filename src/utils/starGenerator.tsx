@@ -1,6 +1,6 @@
 import Image from "next/image";
-import WhiteStar from "../../../public/white_star.svg";
-import BlueStar from "../../../public/blue_star.svg";
+import WhiteStar from "../../public/white_star.svg";
+import BlueStar from "../../public/blue_star.svg";
 
 export default function starGenerator(rating: number) {
   if (!rating) {

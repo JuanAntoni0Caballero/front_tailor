@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogoComponent from "./src/components/logoComponent/logoComponent";
+import LogoComponent from "../src/components/logoComponent/logoComponent";
 
 export default function NotFound() {
   return (

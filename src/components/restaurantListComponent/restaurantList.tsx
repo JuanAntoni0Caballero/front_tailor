@@ -1,8 +1,8 @@
 import ImageComponent from "../imageComponent/imageComponent";
 import Link from "next/link";
-import starImage from "../../../../public/star.svg";
+import starImage from "../../../public/star.svg";
 import Image from "next/image";
-import ErrorAlert from "../../../error";
+import ErrorAlert from "../errorComponent/error";
 
 interface Review {
   rating: number;

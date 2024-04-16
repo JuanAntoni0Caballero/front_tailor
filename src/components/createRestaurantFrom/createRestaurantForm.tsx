@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import InputComponent from "../inputComponent/inputComponent";
 import ButtonComponent from "../buttonComponent/buttonComponent";
-import ErrorAlert from "../../../error";
+import ErrorAlert from "../errorComponent/error";
 import RestaurantService from "../../services/restaurant.service";
 import Image from "next/image";
 import LogoComponent from "../logoComponent/logoComponent";

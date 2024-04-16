@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AuthProvider } from "./src/context/authContext";
+import { AuthProvider } from "../src/context/authContext";
 
 interface LayoutProps {
   children: ReactNode;

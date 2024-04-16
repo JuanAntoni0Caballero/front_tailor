@@ -6,7 +6,7 @@ import LinkComponent from "../linkComponent/linkComponent";
 import { AuthContext } from "../../context/authContext";
 import AuthService from "../../services/auth.service";
 import { useRouter } from "next/navigation";
-import ErrorAlert from "../../../error";
+import ErrorAlert from "../errorComponent/error";
 import LogoComponent from "../logoComponent/logoComponent";
 
 interface LoginData {
@@ -35,11 +35,11 @@ const LoginForm: React.FC = () => {
     try {
       const { email, password } = formData;
       if (!email) {
-        setError(["Please enter your email"]);
+        setError(["Por favor, introduce tu email"]);
         return;
       }
       if (!password) {
-        setError(["Please fill in all fields"]);
+        setError(["Por favor, rellena todos los campos"]);
         return;
       }
       const response = await AuthService.login(formData);

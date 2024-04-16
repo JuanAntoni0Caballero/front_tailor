@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useContext } from "react";
-import ArrowDown from "../../../../public/arrow-down.svg";
-import ArrowUp from "../../../../public/arrow-up.svg";
+import ArrowDown from "../../../public/arrow-down.svg";
+import ArrowUp from "../../../public/arrow-up.svg";
 import { AuthContext } from "../../context/authContext";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import LinkComponent from "../linkComponent/linkComponent";

@@ -1,5 +1,5 @@
 import React from "react";
-import CreateRestaurantResponse from "../../src/components/createRestaurantResponse/createRestaurantResponse";
+import CreateRestaurantResponse from "../../../src/components/createRestaurantResponse/createRestaurantResponse";
 
 const SuccsesfulPage: React.FC = () => {
   return (

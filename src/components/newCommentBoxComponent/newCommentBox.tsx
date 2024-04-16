@@ -1,5 +1,5 @@
 import Image from "next/image";
-import WhiteStar from "../../../../public/white_star.svg";
+import WhiteStar from "../../../public/white_star.svg";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 
 const NewCommentBox = () => {

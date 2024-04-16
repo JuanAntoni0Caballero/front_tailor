@@ -1,5 +1,5 @@
 import React from "react";
-import CreateRestaurantForm from "../../src/components/createRestaurantFrom/createRestaurantForm";
+import CreateRestaurantForm from "../../../src/components/createRestaurantFrom/createRestaurantForm";
 
 const CreateRestaurantPage: React.FC = () => {
   return (

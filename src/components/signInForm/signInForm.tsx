@@ -4,7 +4,7 @@ import InputComponent from "../inputComponent/inputComponent";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import LinkComponent from "../linkComponent/linkComponent";
 import AuthService from "../../services/auth.service";
-import ErrorAlert from "../../../error";
+import ErrorAlert from "../errorComponent/error";
 import { useRouter } from "next/navigation";
 import LogoComponent from "../logoComponent/logoComponent";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import BlackLogo from "../../../../public/logo_black.svg";
-import WhiteLogo from "../../../../public/logo_white.svg";
-import BlueLogo from "../../../../public/logo_blue.svg";
+import BlackLogo from "../../../public/logo_black.svg";
+import WhiteLogo from "../../../public/logo_white.svg";
+import BlueLogo from "../../../public/logo_blue.svg";
 interface LogoProps {
   color?: string;
   width?: number;

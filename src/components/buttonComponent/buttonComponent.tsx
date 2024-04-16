@@ -1,5 +1,5 @@
 import React from "react";
-import ArrowLeft from "../../../../public/arrow-left.svg";
+import ArrowLeft from "../../../public/arrow-left.svg";
 import Image from "next/image";
 
 interface ButtonComponentProps {

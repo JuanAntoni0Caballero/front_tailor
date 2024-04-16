@@ -1,9 +1,9 @@
 import React from "react";
-import ImageComponent from "../../src/components/imageComponent/imageComponent";
+import ImageComponent from "../../../src/components/imageComponent/imageComponent";
 import MapImage from "../../../public/map_img.svg";
-import RestaurantList from "../../src/components/restaurantListComponent/restaurantList";
-import NavBar from "../../src/components/navBarComponent/navBarComponent";
-import RestaurantService from "../../src/services/restaurant.service";
+import RestaurantList from "../../../src/components/restaurantListComponent/restaurantList";
+import NavBar from "../../../src/components/navBarComponent/navBarComponent";
+import RestaurantService from "../../../src/services/restaurant.service";
 
 interface ListPageProps {
   restaurantData: any[];
