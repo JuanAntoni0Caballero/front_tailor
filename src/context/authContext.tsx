@@ -16,6 +16,7 @@ interface AuthContextType {
   setUserData: (userData: UserData | null) => void;
   login: (tailorToken: string) => void;
   logout: () => void;
+  checkAuthentication: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -25,6 +26,7 @@ export const AuthContext = createContext<AuthContextType>({
   setUserData: () => {},
   login: () => {},
   logout: () => {},
+  checkAuthentication: () => {},
 });
 
 interface AuthProviderProps {
@@ -42,10 +44,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(storedToken);
       getUserData(storedToken);
     } else {
-      // router.push("/auth/login");
+      checkAuthentication();
       return;
     }
   }, []);
+
+  const checkAuthentication = () => {
+    if (!token) {
+      router.push("/welcome");
+    }
+  };
 
   const getUserData = async (tailorToken: string) => {
     try {
@@ -62,11 +70,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const userData = await response.json();
         setUserData(userData);
       } else {
-        // router.push("/auth/login");
+        router.push("/welcome");
         return;
       }
     } catch (error) {
-      // router.push("/auth/login");
+      router.push("/welcome");
       return;
     }
   };
@@ -87,12 +95,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken("");
     setUserData(null);
     setIsLogin(false);
-    router.push("/auth/login");
+    router.push("/welcome");
   };
 
   return (
     <AuthContext.Provider
-      value={{ token, isLogin, userData, setUserData, login, logout }}
+      value={{
+        token,
+        isLogin,
+        userData,
+        setUserData,
+        login,
+        logout,
+        checkAuthentication,
+      }}
     >
       {children}
     </AuthContext.Provider>

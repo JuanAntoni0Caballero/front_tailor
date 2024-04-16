@@ -4,7 +4,7 @@ import MapImage from "../../../../public/map_img.svg";
 import RestaurantList from "@/components/restaurantListComponent/restaurantList";
 import NavBar from "@/components/navBarComponent/navBarComponent";
 
-const MapPage: React.FC = () => {
+const ListPage: React.FC = () => {
   return (
     <section>
       <NavBar />
@@ -25,4 +25,4 @@ const MapPage: React.FC = () => {
   );
 };
 
-export default MapPage;
+export default ListPage;

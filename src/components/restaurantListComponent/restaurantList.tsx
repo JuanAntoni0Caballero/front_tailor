@@ -61,29 +61,29 @@ const RestaurantList: React.FC = () => {
   };
 
   return (
-    <div className="h-auto flex flex-col">
+    <div className="h-auto w-11/12 flex flex-col items-center">
       {restaurantData?.map((restaurant, i) => {
         return (
           <Link
             href={`/restaurant/${restaurant.id}`}
             key={i}
-            className="flex items-center w-full mb-4"
+            className="flex items-center w-3/4 mb-4"
           >
             <div className="mr-4">
               <ImageComponent
                 src={restaurant.image}
                 alt={"restaurant image"}
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 className="rounded-lg"
               />
             </div>
             <div className="ml-4">
               <div className="mb-2">
-                <h1 className="text-xl font-bold mb-1 md:text-lg">
+                <h1 className="text-xl font-bold mb-1 sm:text-lg md:text-xl lg:text-2xl">
                   {restaurant.name}
                 </h1>
-                <p className="text-gray-600 text-base md:text-sm">
+                <p className="text-gray-600 text-base sm:text-sm md:text-base lg:text-lg">
                   {restaurant.address}
                 </p>
               </div>
