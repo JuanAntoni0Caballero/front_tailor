@@ -66,8 +66,6 @@ const CreateRestaurantForm: React.FC = () => {
     value,
     onChange,
     text,
-    require,
-    bgColor,
   }: any) => {
     return (
       <div>
@@ -82,7 +80,7 @@ const CreateRestaurantForm: React.FC = () => {
           textColor="black"
           placeholderColor="white"
           require={true}
-          bgColor="white"
+          bgColor="inherit"
         />
       </div>
     );
@@ -158,6 +156,7 @@ const CreateRestaurantForm: React.FC = () => {
               id="description"
               name="description"
               rows={5}
+              style={{ backgroundColor: "inherit" }}
               className="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
               placeholder="Escribe información acerca del restaurante"
               value={formData.description}

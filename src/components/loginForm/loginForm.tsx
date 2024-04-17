@@ -62,7 +62,6 @@ const LoginForm: React.FC = () => {
     placeholder,
     value,
     onChange,
-    bgColor,
   }: any) => {
     return (
       <InputComponent
@@ -76,7 +75,7 @@ const LoginForm: React.FC = () => {
         value={value}
         onChange={onChange}
         require={true}
-        bgColor="#264BEB"
+        bgColor="inherit"
       />
     );
   };

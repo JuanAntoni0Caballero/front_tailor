@@ -68,6 +68,7 @@ const SignUpForm: React.FC = () => {
     placeholder,
     value,
     onChange,
+    bgColor,
   }: any) => {
     return (
       <InputComponent
@@ -81,6 +82,7 @@ const SignUpForm: React.FC = () => {
         value={value}
         onChange={onChange}
         require={true}
+        bgColor="inherit"
       />
     );
   };
