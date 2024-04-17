@@ -10,15 +10,15 @@ import NavBar from "../navBarComponent/navBarComponent";
 import { useRouter } from "next/navigation";
 
 interface RestaurantData {
-  id: number;
+  id: number | undefined;
   name: string;
   description: string;
-  direction: string;
+  address: string;
   image: File | null;
 }
 
 interface RestaurantFormProps {
-  restaurantEditData: RestaurantData;
+  restaurantEditData?: RestaurantData;
 }
 
 const RestaurantForm: React.FC<RestaurantFormProps> = ({
@@ -26,23 +26,27 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
 }) => {
   const router = useRouter();
   const [error, setError] = useState<string[]>([]);
-  const restaurant_id = restaurantEditData.id;
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const restaurant_id = restaurantEditData?.id;
+
   useEffect(() => {
-    if (restaurantEditData) {
+    if (restaurantEditData && restaurantEditData.image) {
       setFormData({
         id: restaurantEditData.id,
         name: restaurantEditData.name,
-        direction: restaurantEditData.address,
+        address: restaurantEditData.address,
         image: restaurantEditData.image,
         description: "",
       });
+      setImagePreviewUrl(URL.createObjectURL(restaurantEditData.image));
     }
   }, [restaurantEditData]);
+
   const [formData, setFormData] = useState<RestaurantData>({
-    id: restaurantEditData.id,
+    id: restaurantEditData?.id,
     name: "",
     description: "",
-    direction: "",
+    address: "",
     image: null,
   });
 
@@ -58,10 +62,14 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setFormData((prevData) => ({
-      ...prevData,
-      image: URL.createObjectURL(file),
-    }));
+    if (file) {
+      setFormData((prevData) => ({
+        ...prevData,
+        image: file,
+      }));
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreviewUrl(imageUrl);
+    }
   };
 
   const createRestaurant = async () => {
@@ -80,10 +88,11 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
   };
   const editRestaurant = async () => {
     try {
-      const response = await RestaurantService.editRestaurant({
+      const response = await RestaurantService.editRestaurant(
         restaurant_id,
-        formData,
-      });
+        formData
+      );
+      console.log("la response ==>", response);
       if (response.error) {
         router.push("/restaurant/cancel");
         setError(response.error);
@@ -156,7 +165,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
               <>
                 <div className="absolute inset-0 overflow-hidden rounded-xl">
                   <Image
-                    src={formData.image}
+                    src={imagePreviewUrl || ""}
                     alt="Preview"
                     width={10000}
                     height={10000}
@@ -189,7 +198,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
               name: "direction",
               placeholder: "Dirección",
               text: "Dirección del restaurante",
-              value: formData.direction,
+              value: formData.address,
               onChange: handleInputChange,
             })}
             <textarea

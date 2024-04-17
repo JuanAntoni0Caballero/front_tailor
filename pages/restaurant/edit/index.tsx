@@ -14,11 +14,11 @@ interface Review {
 interface Restaurant {
   id: number;
   image: any;
+  description: string;
   name: string;
   address: string;
   reviews: Review[];
 }
-
 interface RestaurantDetailPageProps {
   restaurantData: Restaurant | null;
   error: string[];

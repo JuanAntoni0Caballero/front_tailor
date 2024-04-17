@@ -1,7 +1,9 @@
 interface RestaurantData {
+  id: number | undefined;
   name: string;
   description: string;
-  direction: string;
+  address: string;
+  image: File | null;
 }
 
 const createRestaurant = async (
@@ -66,7 +68,7 @@ const getOneRestaurant = async (restaurant_id: number): Promise<any> => {
 };
 
 const editRestaurant = async (
-  restaurant_id: number,
+  restaurant_id: number | undefined,
   formData: RestaurantData
 ): Promise<any> => {
   try {
