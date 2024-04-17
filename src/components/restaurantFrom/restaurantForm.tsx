@@ -14,7 +14,7 @@ interface RestaurantData {
   name: string;
   description: string;
   address: string;
-  image: File | null;
+  image: File | string;
 }
 
 interface RestaurantFormProps {
@@ -26,7 +26,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
 }) => {
   const router = useRouter();
   const [error, setError] = useState<string[]>([]);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<File | string>("");
   const restaurant_id = restaurantEditData?.id;
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
         image: restaurantEditData.image,
         description: "",
       });
-      setImagePreviewUrl(URL.createObjectURL(restaurantEditData.image));
+      setImagePreviewUrl(restaurantEditData.image);
     }
   }, [restaurantEditData]);
 
@@ -47,7 +47,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
     name: "",
     description: "",
     address: "",
-    image: null,
+    image: "",
   });
 
   const handleInputChange = (
@@ -165,7 +165,11 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
               <>
                 <div className="absolute inset-0 overflow-hidden rounded-xl">
                   <Image
-                    src={imagePreviewUrl || ""}
+                    src={
+                      typeof formData.image === "string"
+                        ? formData.image
+                        : URL.createObjectURL(formData.image)
+                    }
                     alt="Preview"
                     width={10000}
                     height={10000}
@@ -177,7 +181,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
                     type="button"
                     text={"Eliminar"}
                     textColor="White"
-                    onClick={() => setFormData({ ...formData, image: null })}
+                    onClick={() => setFormData({ ...formData, image: "" })}
                   />
                 </div>
               </>
