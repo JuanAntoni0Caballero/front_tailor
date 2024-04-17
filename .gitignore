@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# Environment Variables should NEVER be published
+.env
+
 # next.js
 /.next/
 /out/
