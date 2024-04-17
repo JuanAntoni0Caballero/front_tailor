@@ -67,7 +67,7 @@ const getOneRestaurant = async (restaurant_id: number): Promise<any> => {
 
 const editRestaurant = async (
   restaurant_id: number,
-  restaurantData: RestaurantData
+  formData: RestaurantData
 ): Promise<any> => {
   try {
     const response = await fetch(
@@ -77,7 +77,7 @@ const editRestaurant = async (
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(restaurantData),
+        body: JSON.stringify(formData),
       }
     );
     if (!response.ok) {
@@ -143,7 +143,6 @@ const unLikedRestaurant = async (
   user_id: string
 ): Promise<any> => {
   try {
-    console.log("restaurant_id ==>", typeof restaurant_id);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/restaurant/unlikedRestaurant/${restaurant_id}/${user_id}`,
       {

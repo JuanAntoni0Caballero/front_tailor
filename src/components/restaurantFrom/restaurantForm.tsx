@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputComponent from "../inputComponent/inputComponent";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import ErrorAlert from "../errorComponent/error";
@@ -10,16 +10,36 @@ import NavBar from "../navBarComponent/navBarComponent";
 import { useRouter } from "next/navigation";
 
 interface RestaurantData {
+  id: number;
   name: string;
   description: string;
   direction: string;
   image: File | null;
 }
 
-const CreateRestaurantForm: React.FC = () => {
+interface RestaurantFormProps {
+  restaurantEditData: RestaurantData;
+}
+
+const RestaurantForm: React.FC<RestaurantFormProps> = ({
+  restaurantEditData,
+}) => {
   const router = useRouter();
   const [error, setError] = useState<string[]>([]);
+  const restaurant_id = restaurantEditData.id;
+  useEffect(() => {
+    if (restaurantEditData) {
+      setFormData({
+        id: restaurantEditData.id,
+        name: restaurantEditData.name,
+        direction: restaurantEditData.address,
+        image: restaurantEditData.image,
+        description: "",
+      });
+    }
+  }, [restaurantEditData]);
   const [formData, setFormData] = useState<RestaurantData>({
+    id: restaurantEditData.id,
     name: "",
     description: "",
     direction: "",
@@ -40,7 +60,7 @@ const CreateRestaurantForm: React.FC = () => {
     const file = e.target.files?.[0] || null;
     setFormData((prevData) => ({
       ...prevData,
-      image: file,
+      image: URL.createObjectURL(file),
     }));
   };
 
@@ -56,6 +76,23 @@ const CreateRestaurantForm: React.FC = () => {
     } catch (err) {
       setError(["Error al crear el restaurante"]);
       console.error("Error al crear el restaurante:", err);
+    }
+  };
+  const editRestaurant = async () => {
+    try {
+      const response = await RestaurantService.editRestaurant({
+        restaurant_id,
+        formData,
+      });
+      if (response.error) {
+        router.push("/restaurant/cancel");
+        setError(response.error);
+      } else {
+        router.push("/restaurant/successful");
+      }
+    } catch (err) {
+      setError(["Error al editar el restaurante"]);
+      console.error("Error al editar el restaurante:", err);
     }
   };
 
@@ -119,7 +156,7 @@ const CreateRestaurantForm: React.FC = () => {
               <>
                 <div className="absolute inset-0 overflow-hidden rounded-xl">
                   <Image
-                    src={URL.createObjectURL(formData.image)}
+                    src={formData.image}
                     alt="Preview"
                     width={10000}
                     height={10000}
@@ -166,11 +203,19 @@ const CreateRestaurantForm: React.FC = () => {
                 handleInputChange(e)
               }
             ></textarea>
-            <ButtonComponent
-              type="button"
-              onClick={createRestaurant}
-              text="Guardar"
-            />
+            {restaurantEditData ? (
+              <ButtonComponent
+                type="button"
+                onClick={editRestaurant}
+                text="Editar"
+              />
+            ) : (
+              <ButtonComponent
+                type="button"
+                onClick={createRestaurant}
+                text="Guardar"
+              />
+            )}
           </div>
         </div>
         <div className="my-5">
@@ -182,4 +227,4 @@ const CreateRestaurantForm: React.FC = () => {
   );
 };
 
-export default CreateRestaurantForm;
+export default RestaurantForm;
