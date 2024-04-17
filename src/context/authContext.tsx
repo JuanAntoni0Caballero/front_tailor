@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const checkAuthentication = () => {
     if (!token) {
-      router.push("/welcome");
+      router.push("/");
     }
   };
 
@@ -68,11 +68,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const userData = await response.json();
         setUserData(userData);
       } else {
-        router.push("/welcome");
+        router.push("/");
         return;
       }
     } catch (error) {
-      router.push("/welcome");
+      router.push("/");
       return;
     }
   };
