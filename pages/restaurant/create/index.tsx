@@ -1,10 +1,10 @@
 import React from "react";
-import CreateRestaurantForm from "../../../src/components/createRestaurantFrom/createRestaurantForm";
+import RestaurantForm from "../../../src/components/restaurantFrom/restaurantForm";
 
 const CreateRestaurantPage: React.FC = () => {
   return (
     <div>
-      <CreateRestaurantForm />
+      <RestaurantForm />
     </div>
   );
 };

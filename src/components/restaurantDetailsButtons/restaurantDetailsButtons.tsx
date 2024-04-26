@@ -52,7 +52,7 @@ const RestaurantDetailButtons = ({
           body={`¿Quieres editar el restaurante ${restaurantId}?`}
           buttonText="Editar"
           onClick={() => {
-            console.log("Editando");
+            router.push(`/restaurant/edit?restaurantId=${restaurantId}`);
           }}
         />
       )}

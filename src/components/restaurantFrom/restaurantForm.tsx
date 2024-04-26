@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputComponent from "../inputComponent/inputComponent";
 import ButtonComponent from "../buttonComponent/buttonComponent";
 import ErrorAlert from "../errorComponent/error";
@@ -10,19 +10,43 @@ import NavBar from "../navBarComponent/navBarComponent";
 import { useRouter } from "next/navigation";
 
 interface RestaurantData {
+  id: number | undefined;
   name: string;
   description: string;
-  direction: string;
+  address: string;
   image: File | null;
 }
 
-const CreateRestaurantForm: React.FC = () => {
+interface RestaurantFormProps {
+  restaurantEditData?: RestaurantData;
+}
+
+const RestaurantForm: React.FC<RestaurantFormProps> = ({
+  restaurantEditData,
+}) => {
   const router = useRouter();
   const [error, setError] = useState<string[]>([]);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const restaurant_id = restaurantEditData?.id;
+
+  useEffect(() => {
+    if (restaurantEditData && restaurantEditData.image) {
+      setFormData({
+        id: restaurantEditData.id,
+        name: restaurantEditData.name,
+        address: restaurantEditData.address,
+        image: restaurantEditData.image,
+        description: "",
+      });
+      setImagePreviewUrl(URL.createObjectURL(restaurantEditData.image));
+    }
+  }, [restaurantEditData]);
+
   const [formData, setFormData] = useState<RestaurantData>({
+    id: restaurantEditData?.id,
     name: "",
     description: "",
-    direction: "",
+    address: "",
     image: null,
   });
 
@@ -38,10 +62,14 @@ const CreateRestaurantForm: React.FC = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setFormData((prevData) => ({
-      ...prevData,
-      image: file,
-    }));
+    if (file) {
+      setFormData((prevData) => ({
+        ...prevData,
+        image: file,
+      }));
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreviewUrl(imageUrl);
+    }
   };
 
   const createRestaurant = async () => {
@@ -56,6 +84,24 @@ const CreateRestaurantForm: React.FC = () => {
     } catch (err) {
       setError(["Error al crear el restaurante"]);
       console.error("Error al crear el restaurante:", err);
+    }
+  };
+  const editRestaurant = async () => {
+    try {
+      const response = await RestaurantService.editRestaurant(
+        restaurant_id,
+        formData
+      );
+      console.log("la response ==>", response);
+      if (response.error) {
+        router.push("/restaurant/cancel");
+        setError(response.error);
+      } else {
+        router.push("/restaurant/successful");
+      }
+    } catch (err) {
+      setError(["Error al editar el restaurante"]);
+      console.error("Error al editar el restaurante:", err);
     }
   };
 
@@ -116,7 +162,7 @@ const CreateRestaurantForm: React.FC = () => {
               <>
                 <div className="absolute inset-0 overflow-hidden rounded-xl">
                   <Image
-                    src={URL.createObjectURL(formData.image)}
+                    src={imagePreviewUrl || ""}
                     alt="Preview"
                     width={10000}
                     height={10000}
@@ -149,7 +195,7 @@ const CreateRestaurantForm: React.FC = () => {
               name: "direction",
               placeholder: "Dirección",
               text: "Dirección del restaurante",
-              value: formData.direction,
+              value: formData.address,
               onChange: handleInputChange,
             })}
             <textarea
@@ -164,11 +210,19 @@ const CreateRestaurantForm: React.FC = () => {
                 handleInputChange(e)
               }
             ></textarea>
-            <ButtonComponent
-              type="button"
-              onClick={createRestaurant}
-              text="Guardar"
-            />
+            {restaurantEditData ? (
+              <ButtonComponent
+                type="button"
+                onClick={editRestaurant}
+                text="Editar"
+              />
+            ) : (
+              <ButtonComponent
+                type="button"
+                onClick={createRestaurant}
+                text="Guardar"
+              />
+            )}
           </div>
         </div>
         <div className="my-5">
@@ -180,4 +234,4 @@ const CreateRestaurantForm: React.FC = () => {
   );
 };
 
-export default CreateRestaurantForm;
+export default RestaurantForm;
