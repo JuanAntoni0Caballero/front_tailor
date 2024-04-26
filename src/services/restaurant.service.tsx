@@ -3,7 +3,7 @@ interface RestaurantData {
   name: string;
   description: string;
   address: string;
-  image: File | null;
+  image: File | string;
 }
 
 const createRestaurant = async (
